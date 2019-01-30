@@ -15,7 +15,7 @@ IF you want to run tests, you'll have to have a working ruby environment with bu
 	a. Install dependent Gems
    `bundle install --path vendor`
    *Note that this puts all needed gems in a vendor subdirectory, to avoid clashes*
-  b.  Run tests
+        b.  Run tests
   `rake spec`
 ## Usage  
   ### Vagrantfile Updates
