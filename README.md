@@ -12,10 +12,10 @@ git clone git@github.com:petermeulbroek/salt-vagrant.git
 IF you want to run tests, you'll have to have a working ruby environment with bundler and rspec.  If you don't want to run the distribution rspec tests, skip the next steps
 
 ### Testing the classes
-	a. Install dependent Gems
+#### Install dependent Gems
    `bundle install --path vendor`
    *Note that this puts all needed gems in a vendor subdirectory, to avoid clashes*
-        b.  Run tests
+#### Run tests
   `rake spec`
 ## Usage  
   ### Vagrantfile Updates
