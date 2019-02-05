@@ -16,8 +16,10 @@ module Salt
       self['minions'][minion.name] = minion
       minion['master'] = self
     end
+
     def registerSyndic(syndic)
       self['syndics'][syndic.name] = syndic
+      syndic['syndic_master'] = self
       
     end
     
