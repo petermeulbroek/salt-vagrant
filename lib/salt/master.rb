@@ -32,7 +32,8 @@ module Salt
     
     def addMasterConfig(salt)
       self['minions'].each do |n, v|
-        if v.is_a?(Salt::Syndic)
+        # master of masters.  Assumes that a syndic can't be master-of-masters.
+        if v.is_a?(Salt::Syndic) and v != self
           self['master_config']['order_masters'] = true
           break
         end

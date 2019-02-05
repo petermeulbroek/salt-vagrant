@@ -83,6 +83,22 @@ RSpec.describe Salt::Master do
       end
     end
   end
-  
+  context "complex master" do
+    before :each do
+      @salt = double
+      @name = "myName"
+      @info = {
+        "ip" => "199.199.199.198",
+        "master_config" => {"foo" => "bar", "biz" => {"baz" => "buzz"}},
+        "role" => 'master'
+      }
+    end
+    it "should handle complex structures" do
+      @obj = Salt::Master.new(@name, @info)
+        
+      expect(@salt).to receive(:master_json_config=).with({"foo" => "bar", "biz" => {"baz" => "buzz"}}.to_json)
+        @obj.addMasterConfig(@salt)
+    end      
+  end
 end
 # Copyright (C) 2019 by Risk Focus Inc.  All rights reserved
