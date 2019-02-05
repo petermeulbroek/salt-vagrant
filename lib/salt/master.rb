@@ -16,8 +16,13 @@ module Salt
       self['minions'][minion.name] = minion
       minion['master'] = self
     end
+
     def registerSyndic(syndic)
       self['syndics'][syndic.name] = syndic
+      syndic['syndic_master'] = self
+
+      # NB:  in order for a syndic to work, the minion key must be accepted on the master
+      self['minions'][syndic.name] = syndic
       
     end
     
@@ -36,7 +41,7 @@ module Salt
     end
     
     def addMasterConfig(salt)
-      self['master_config']['order_masters'] = true unless( self['syndics'].is_empty? )
+      self['master_config']['order_masters'] = true unless( self['syndics'].empty? )
       salt.master_json_config = self['master_config'].to_json
 
     end
