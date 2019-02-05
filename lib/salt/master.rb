@@ -36,7 +36,7 @@ module Salt
     end
     
     def addMasterConfig(salt)
-      self['master_config']['order_masters'] = true unless( self['syndics'].is_empty? )
+      self['master_config']['order_masters'] = true unless( self['syndics'].empty? )
       salt.master_json_config = self['master_config'].to_json
 
     end
