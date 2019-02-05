@@ -6,7 +6,8 @@ module Salt
     def initialize(name, info)
       self['master_config'] = {}
       self['minions'] = {}
-
+      self['syndics'] = {}
+      
       super
       
     end
@@ -15,7 +16,11 @@ module Salt
       self['minions'][minion.name] = minion
       minion['master'] = self
     end
-
+    def registerSyndic(syndic)
+      self['syndics'][syndic.name] = syndic
+      
+    end
+    
     # create the hash of minion keys that the master should be seeded with
     def minionList
       self['minions'].transform_values {|v| v.pub_key }
@@ -31,14 +36,7 @@ module Salt
     end
     
     def addMasterConfig(salt)
-      self['minions'].each do |n, v|
-        # master of masters.  Assumes that a syndic can't be master-of-masters.
-        if v.is_a?(Salt::Syndic) and v != self
-          self['master_config']['order_masters'] = true
-          break
-        end
-      end
-
+      self['master_config']['order_masters'] = true unless( self['syndics'].empty? )
       salt.master_json_config = self['master_config'].to_json
 
     end
