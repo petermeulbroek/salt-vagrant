@@ -21,7 +21,8 @@ module Salt
       self['syndics'][syndic.name] = syndic
       syndic['syndic_master'] = self
 
-      # NB:  in order for a syndic to work, the minion key must be accepted on the master
+      # NB: in order for a syndic to work, the minion key must be
+      # accepted on the master
       self['minions'][syndic.name] = syndic
       
     end

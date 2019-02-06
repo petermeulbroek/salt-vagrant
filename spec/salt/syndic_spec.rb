@@ -33,6 +33,7 @@ RSpec.describe Salt::Syndic do
       @master.registerSyndic(@obj)
 
       expect(@master['syndics']).to have_key(@obj.name)
+
       #key should be added to minion list (to be auto-accepted)
       expect(@master['minions']).to have_key(@obj.name)
     end
